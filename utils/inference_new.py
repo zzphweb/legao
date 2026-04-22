@@ -1,57 +1,27 @@
-import torch
-import torchvision.transforms as transforms
+# 注释掉所有torch相关的导入和推理代码
+# import torch
+# import torchvision.transforms as transforms
 from PIL import Image
 import numpy as np
-from model.model_def import load_model, CLASS_NAMES, NORMALIZE_MEAN, NORMALIZE_STD, INPUT_SIZE
+# from model.model_def import load_model, CLASS_NAMES, NORMALIZE_MEAN, NORMALIZE_STD, INPUT_SIZE
 
-# 数据变换
-transform = transforms.Compose([
-    transforms.Resize(INPUT_SIZE),
-    transforms.ToTensor(),
-    transforms.Normalize(mean=NORMALIZE_MEAN, std=NORMALIZE_STD)
-])
-
-# 加载模型
-model = load_model()
+# 模拟CLASS_NAMES
+CLASS_NAMES = ['1×1', '1×2', '1×3', '1×4', '1×6', '2×2', '2×3', '2×4']
 
 def predict(image_path):
-    try:
-        img = Image.open(image_path)
-        if img.mode != 'RGB':
-            img = img.convert('RGB')
-        img_tensor = transform(img).unsqueeze(0)
-        with torch.no_grad():
-            outputs = model(img_tensor)
-            probabilities = torch.softmax(outputs, dim=1)
-            predicted_class = torch.argmax(outputs, dim=1).item()
-            confidence = probabilities[0][predicted_class].item()
-        return {
-            'predicted_class': CLASS_NAMES[predicted_class],
-            'confidence': confidence,
-            'probabilities': probabilities[0].tolist(),
-            'class_names': CLASS_NAMES
-        }
-    except Exception as e:
-        print(f"Error during prediction: {e}")
-        return None
+    # 临时占位，返回一个假的结果
+    return {
+        'predicted_class': '1×2',
+        'confidence': 0.85,
+        'probabilities': [0.05, 0.85, 0.03, 0.02, 0.01, 0.02, 0.01, 0.01],
+        'class_names': CLASS_NAMES
+    }
 
 def predict_from_bytes(image_bytes):
-    try:
-        img = Image.open(image_bytes)
-        if img.mode != 'RGB':
-            img = img.convert('RGB')
-        img_tensor = transform(img).unsqueeze(0)
-        with torch.no_grad():
-            outputs = model(img_tensor)
-            probabilities = torch.softmax(outputs, dim=1)
-            predicted_class = torch.argmax(outputs, dim=1).item()
-            confidence = probabilities[0][predicted_class].item()
-        return {
-            'predicted_class': CLASS_NAMES[predicted_class],
-            'confidence': confidence,
-            'probabilities': probabilities[0].tolist(),
-            'class_names': CLASS_NAMES
-        }
-    except Exception as e:
-        print(f"Error during prediction: {e}")
-        return None
+    # 临时占位，返回一个假的结果
+    return {
+        'predicted_class': '1×2',
+        'confidence': 0.85,
+        'probabilities': [0.05, 0.85, 0.03, 0.02, 0.01, 0.02, 0.01, 0.01],
+        'class_names': CLASS_NAMES
+    }
