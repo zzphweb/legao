@@ -1,0 +1,29 @@
+# 忽略文件
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDE
+.vscode/
+.idea/
+
+# 数据
+*.csv
+*.xlsx
+*.json
+
+# 模型
+*.h5
+*.keras
+*.pb
+
+# 环境
+.env
+venv/
+env/
+
+# 操作系统
+.DS_Store
+Thumbs.db

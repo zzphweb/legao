@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>识别结果</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .result-container {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .result-item {
+            padding: 15px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        img {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .confidence {
+            font-size: 14px;
+            color: #666;
+        }
+        .not-lego {
+            color: #f44336;
+            font-weight: bold;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        a:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>识别结果</h1>
+    <div class="result-container">
+        <div class="result-grid">
+            {% for result in results %}
+            <div class="result-item">
+                <img src="{{ result.image_url }}" alt="上传的图片">
+                {% if result.is_lego %}
+                <h3>识别结果: {{ result.prediction }}</h3>
+                <p class="confidence">置信度: {{ result.confidence }}%</p>
+                {% else %}
+                <h3 class="not-lego">识别结果: 不是乐高积木</h3>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="/">返回上传页面</a>
+    </div>
+</body>
+</html>
